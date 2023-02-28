@@ -1,0 +1,22 @@
+  const [todos, setTodos] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+These two lines use the useState hook to define two state variables: 
+todos and inputValue. todos is an array that will store the list of todo items, 
+and inputValue is a string that will store the current value of the input field used to add new todo items. 
+setTodos and setInputValue are functions that can be used to update the state variables, respectively.
+
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+This defines a function called handleInputChange that will be called whenever 
+the text input used to add new todo items is changed. It takes an event object as a parameter, 
+which contains information about the change event. 
+The function sets the value of the inputValue state variable to the current value of the text input.
+
+
+
+  const handleDeleteTodo = (id) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+  };
