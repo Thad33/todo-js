@@ -4,6 +4,10 @@ function Todo() {
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
+ // This line defines a new function called handleInputChange, 
+  // which will be called whenever the text input used to add new todo items is changed. 
+  // It sets the value
+  //  of the inputValue state to the current value of the text input.
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -15,7 +19,7 @@ function Todo() {
       setInputValue('');
     }
   };
-
+ 
   const handleDeleteTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
     setTodos(updatedTodos);
