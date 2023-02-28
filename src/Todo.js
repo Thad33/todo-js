@@ -1,35 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react';
 
- function Todo() {
-  const [todo = setTodo] = setState([
-    {
-      id: 3,
-      title: "Basketball",
-      description: "Am hooping all day",
-      status: "Pending"
-    },
-    {
-      id: 3,
-      title: "Coding ",
-      description: "Coding For Life",
-      status: "Pending"
+function Todo() {
+  const [todos, setTodos] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleAddTodo = () => {
+    if (inputValue !== '') {
+      const newTodo = { id: Date.now(), text: inputValue, completed: false };
+      setTodos([...todos, newTodo]);
+      setInputValue('');
     }
-  ])}
+  };
+
+  const handleDeleteTodo = (id) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+  };
+
+  const handleToggleComplete = (id) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, completed: !todo.completed };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
+
   return (
-    <>
-    <div className='con-todo'>
-      <h3>Welcome</h3>
-      <h3>Add</h3>
+    <div>
+      <h2>Todo List</h2>
+      <input type="text" value={inputValue} onChange={handleInputChange} />
+      <button onClick={handleAddTodo}>Add Todo</button>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+            {todo.text}
+            <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+            <button onClick={() => handleToggleComplete(todo.id)}>
+              {todo.completed ? 'Mark as Unread' : 'Mark as Read'}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
-    <div className="todoList">
-      {todo.map((item)=>{
-        return(
-          <div></div>
-        )
-      })}
-    </div>
-    </>
-  )
+  );
+}
 
+export default Todo;
 
-export default Todo
