@@ -39,11 +39,13 @@ function Todo() {
       <ul>
         {todos.map((todo) => (
           <li key={todo.id} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => handleToggleComplete(todo.id)}
+            />
             {todo.text}
             <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-            <button onClick={() => handleToggleComplete(todo.id)}>
-              {todo.completed ? 'Mark as Unread' : 'Mark as Read'}
-            </button>
           </li>
         ))}
       </ul>
@@ -52,4 +54,3 @@ function Todo() {
 }
 
 export default Todo;
-
